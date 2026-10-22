@@ -7,3 +7,9 @@ lint:
 
 train:
 	uv run python -m src.modelling.main data/abalone.csv
+
+prefect-server:
+	uv run prefect server start
+
+deploy:
+	PREFECT_API_URL=http://127.0.0.1:4200/api uv run python -m src.modelling.deployment

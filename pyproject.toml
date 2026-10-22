@@ -5,6 +5,7 @@ authors = [
   { name = "Nikolai Levin" },
   { name = "Hitaishi Dhoowooah" },
   { name = "Martin Dias Pinto" },
+  { name = "Guust Goossens" },
 ]
 description = "X-HEC MLOps Project on Abalone age prediction model"
 requires-python = ">=3.11,<3.12"
