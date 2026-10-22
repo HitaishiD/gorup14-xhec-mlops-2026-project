@@ -1,14 +1,24 @@
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "xhec-mlops-project-student"
 version = "0.0.1"
 authors = [
-  { name = "username", email = "user@email.com" },
-] # TODO: add authors here
+  { name = "Nikolai Levin" },
+  { name = "Hitaishi Dhoowooah" },
+  { name = "Martin Dias Pinto" },
+]
 description = "X-HEC MLOps Project on Abalone age prediction model"
-requires-python = ">3.10" # TODO: update this version
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "fastapi==0.159.1",
+    "pandas==3.0.6",
+    "prefect==3.8.8",
+    "pydantic==2.14.1",
+    "scikit-learn==1.9.1",
+    "uvicorn==0.54.0",
+]
 
-# TODO: add pydantic, pre-commit and ruff as a dependency
+[dependency-groups]
+dev = [
+    "pre-commit==4.7.0",
+    "ruff==0.17.1",
+]
