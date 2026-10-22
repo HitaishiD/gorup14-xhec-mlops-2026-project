@@ -85,3 +85,11 @@ secrets/*
 
 # Mac files
 .DS_Store
+
+# Data (download it manually, see README)
+data/*.csv
+
+# MLflow
+mlruns/
+mlartifacts/
+mlflow.db
