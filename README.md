@@ -13,7 +13,7 @@ Predict the age (number of rings) of abalone from physical measurements.
 | Nikolai Levin | [Nikolai-Levin](https://github.com/Nikolai-Levin) |
 | Hitaishi Dhoowooah | [HitaishiD](https://github.com/HitaishiD) |
 | Martin Dias Pinto | [mdiaspinto](https://github.com/mdiaspinto) |
-| Guust | _TBD_ |
+| Guust Goossens | [guustgoossens](https://github.com/guustgoossens) |
 
 ## Setup
 
@@ -27,6 +27,38 @@ make lint      # runs the pre-commit hooks (ruff lint + format) on all files
 ## Data
 
 Download the [Kaggle abalone dataset](https://www.kaggle.com/datasets/rodolfomendes/abalone-dataset) and save it, unchanged, as `data/abalone.csv`. The data is not committed (`data/*.csv` is gitignored).
+
+## Train the model
+
+```bash
+make train
+```
+
+This runs `python -m src.modelling.main data/abalone.csv`: it trains a linear regression, prints the RMSE on a 20% test split, and writes `model.pkl` and `encoder.pkl` to `src/web_service/local_objects/`. Both pickles are committed, so the API works without training first.
+
+## Orchestrate with Prefect
+
+Training is a Prefect flow (`training_flow` in `src/modelling/main.py`), with each step (load, preprocess, train, predict, evaluate, save) as a task.
+
+Start the Prefect server in its own terminal. The UI is then at http://127.0.0.1:4200.
+
+```bash
+make prefect-server
+```
+
+In a second terminal, serve the deployment that retrains the model every day at midnight (UTC). It keeps running and picks up the scheduled runs.
+
+```bash
+make deploy
+```
+
+To retrain now instead of waiting, click **Run → Quick run** on the `training-flow/retraining` deployment in the UI, or run:
+
+```bash
+PREFECT_API_URL=http://127.0.0.1:4200/api uv run prefect deployment run 'training-flow/retraining'
+```
+
+Each run, with its task runs and logs (including the test RMSE), shows up under **Runs** in the UI. `make train` runs the same flow once, without the deployment.
 
 ## Prediction API
 
@@ -48,6 +80,6 @@ curl -X POST http://localhost:8000/predict \
   -d '{"sex": "M", "length": 0.455, "diameter": 0.365, "height": 0.095, "whole_weight": 0.514, "shucked_weight": 0.2245, "viscera_weight": 0.101, "shell_weight": 0.15}'
 ```
 
-The response is the predicted number of rings, e.g. `{"rings": 9.3}`. `sex` must be `"M"`, `"F"` or `"I"`.
+The response is the predicted number of rings, e.g. `{"rings": 9.2}`. `sex` must be `"M"`, `"F"` or `"I"`.
 
 To run the API without Docker, use `make api` (same port, reloads on code changes).
