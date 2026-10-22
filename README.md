@@ -27,3 +27,11 @@ make lint      # runs the pre-commit hooks (ruff lint + format) on all files
 ## Data
 
 Download the [Kaggle abalone dataset](https://www.kaggle.com/datasets/rodolfomendes/abalone-dataset) and save it, unchanged, as `data/abalone.csv`. The data is not committed (`data/*.csv` is gitignored).
+
+## Train the model
+
+```bash
+make train
+```
+
+This runs `python -m src.modelling.main data/abalone.csv`: it trains a linear regression, prints the RMSE on a 20% test split, and writes `model.pkl` and `encoder.pkl` to `src/web_service/local_objects/`. Both pickles are committed, so the API works without training first.
