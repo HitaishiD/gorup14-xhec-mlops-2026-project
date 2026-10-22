@@ -6,19 +6,19 @@ This file is the agreed plan for the project. If something here needs to change,
 
 ## Team
 
-| Role | Who | GitHub | Branches |
-|---|---|---|---|
-| A – Setup & integration | Nikolai Levin | `Nikolai-Levin` | `0/environment_setup`, final integration PR |
-| B – Data & model | Hitaishi Dhoowooah | `HitaishiD` | `1/eda_and_modelling_notebooks`, `2/from_notebooks_to_modules` |
-| C – API & Docker | Martin Dias Pinto | `mdiaspinto` | `4/deploy_model_api` |
-| D – Orchestration | Guust | _TBD_ | `3/use_prefect` |
+| Role | Who | GitHub | Branches | Issues |
+|---|---|---|---|---|
+| A – Setup & integration | Nikolai Levin | `Nikolai-Levin` | `0/environment_setup`, final integration PR | #2, #7 |
+| B – Data & model | Hitaishi Dhoowooah | `HitaishiD` | `1/eda_and_modelling_notebooks`, `2/from_notebooks_to_modules` | #3, #4 |
+| C – API & Docker | Martin Dias Pinto | `mdiaspinto` | `4/deploy_model_api` | #6 |
+| D – Orchestration | Guust | _TBD_ | `3/use_prefect` | #5 |
 
 Everyone must have at least one significant commit merged into `main`.
 
 ## Rules
 
 - **Merge commits only.** Never squash or rebase-merge. Graders read the commit history.
-- **Every PR needs 1 approval** from a teammate before it's merged. Nobody pushes to `main` directly.
+- **Every change goes through a PR**, reviewed by a teammate before merging. Nobody pushes to `main` directly. GitHub doesn't enforce this, so it's on us.
 - **One owner per branch.** You work on the numbered template branch you own.
 - **Bring in `main` before opening your PR:** `git merge origin/main`. Don't rebase or force-push.
 - **Once a branch is merged**, stop committing to it.
@@ -31,7 +31,6 @@ Everyone must have at least one significant commit merged into `main`.
 
 - [ ] Settings → General → Pull Requests: turn off **squash merging** and **rebase merging** (merge commits only)
 - [ ] Settings → General → Features: turn on **Issues**
-- [ ] Settings → Branches: add a rule on `main` that requires a pull request with **1 approval**
 - [ ] When Guust arrives: add him as an **admin** collaborator
 
 ## Data
