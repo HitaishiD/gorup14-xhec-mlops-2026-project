@@ -64,6 +64,8 @@ Each run, with its task runs and logs (including the test RMSE), shows up under 
 
 The API serves the model and encoder committed in `src/web_service/local_objects/`, so no training is needed to run it. It requires [Docker](https://docs.docker.com/get-docker/) to be running.
 
+The container runs its own Prefect server on port 4200, so first stop `make prefect-server` and `make deploy` (Ctrl+C in their terminals).
+
 ```bash
 make docker-build   # builds the image from Dockerfile.app
 make docker-run     # starts the API and the Prefect server
